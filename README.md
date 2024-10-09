@@ -81,3 +81,17 @@ docker-compose up --build
 ```
 
 This will build and run your application.
+
+## Continuous Integration
+
+This project uses GitHub Actions for continuous integration. The workflow does the following:
+
+- Runs on every push to the `main` branch and on pull requests to the `main` branch
+- Sets up a Node.js environment
+- Installs dependencies
+- Runs the linter
+- Builds the application
+- Runs tests (when implemented)
+- Builds and runs the Docker image
+
+You can see the workflow runs in the "Actions" tab of the GitHub repository.
