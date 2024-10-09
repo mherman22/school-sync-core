@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mbarara Girls Management System (MGMS)
+
+This is a comprehensive school management system built with Next.js for Mbarara Girls School.
 
 ## Getting Started
 
@@ -34,3 +36,22 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Project Structure and Routing
+
+The application uses Next.js's file-based routing system. Here's an overview of the main routes:
+
+- `/` - Home page (redirects to login)
+- `/login` - User login page
+- `/register` - User registration page
+- `/dashboard` - Main dashboard (redirects to overview)
+  - `/dashboard/overview` - Overview of key statistics
+  - `/dashboard/reports` - Generate and view reports
+  - `/dashboard/timetables` - Manage school timetables
+  - `/dashboard/teachers` - Manage teacher information
+  - `/dashboard/circular` - Create and print circulars
+  - `/dashboard/finance` - Manage school finances
+  - `/dashboard/dispensary` - Manage school health services
+  - `/dashboard/dormitory` - Manage student accommodations
+
+Each of these routes corresponds to a file in the `src/app` directory structure.
