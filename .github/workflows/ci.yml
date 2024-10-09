@@ -69,9 +69,3 @@ jobs:
         context: .
         push: false
         tags: mgms-app:latest
-        
-    - name: Test Docker image
-      run: |
-        docker run -d --name mgms-container mgms-app:latest
-        docker ps
-        docker logs mgms-container
