@@ -31,6 +31,9 @@ cd ..
 DATE=$(date +%Y-%m-%d)
 sed -i "s/## \[Unreleased\]/## [Unreleased]\n\n## [$RELEASE_VERSION] - $DATE/" CHANGELOG.md
 
+# Update the date for any existing version entries that still have YYYY-MM-DD
+sed -i "s/\[[0-9]\+\.[0-9]\+\.[0-9]\+\] - YYYY-MM-DD/[$RELEASE_VERSION] - $DATE/" CHANGELOG.md
+
 # Update Dockerfile
 sed -i "s/org.opencontainers.image.version=\".*\"/org.opencontainers.image.version=\"$RELEASE_VERSION\"/" Dockerfile
 

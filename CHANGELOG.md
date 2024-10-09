@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Release script for easier version management and deployment
 
-## [1.0.0] - YYYY-MM-DD
+## [1.0.1] - 2024-10-09
 
 ### Added
 - Initial release of the Mbarara Girls Secondary School Management System
