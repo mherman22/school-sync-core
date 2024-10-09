@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+- Updated Spring Boot to version 2.7.14 to address security vulnerabilities
+- Updated PostgreSQL driver to version 42.6.0 to address security vulnerabilities
+
+### Added
+- Release script for easier version management and deployment
+
 ## [1.0.0] - YYYY-MM-DD
 
 ### Added

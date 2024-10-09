@@ -1,6 +1,6 @@
 {
   "name": "mbarara-girls-management-system",
-  "version": "1.0.0-SNAPSHOT",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
