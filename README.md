@@ -55,3 +55,29 @@ The application uses Next.js's file-based routing system. Here's an overview of 
   - `/dashboard/dormitory` - Manage student accommodations
 
 Each of these routes corresponds to a file in the `src/app` directory structure.
+
+## Running with Docker
+
+To run the application using Docker, follow these steps:
+
+1. Make sure you have Docker installed on your system.
+
+2. Build the Docker image:
+   ```
+   docker build -t mgms-app .
+   ```
+
+3. Run the container:
+   ```
+   docker run -p 3000:3000 mgms-app
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to access the application.
+
+Alternatively, if you have Docker Compose installed, you can use:
+
+```
+docker-compose up --build
+```
+
+This will build and run your application.
