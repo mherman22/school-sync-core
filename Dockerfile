@@ -18,7 +18,6 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 COPY --from=backend-build /app/target/*.jar app.jar
 COPY --from=frontend-build /app/.next ./frontend/.next
-COPY --from=frontend-build /app/public ./frontend/public
 COPY --from=frontend-build /app/package*.json ./frontend/
 
 # Install Node.js in the final image
