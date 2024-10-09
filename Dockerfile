@@ -6,7 +6,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Frontend build stage
-FROM node:14 as frontend-build
+FROM node:18 as frontend-build
 WORKDIR /app
 COPY frontend/package*.json ./
 RUN npm install
