@@ -11,41 +11,57 @@
 
 # Check if a version number was provided
 if [ -z "$1" ]; then
-    echo "Please provide a version number (e.g., 1.0.1)"
+    echo "Please provide a version number (e.g., 1.0.0)"
     exit 1
 fi
 
-NEW_VERSION=$1
+RELEASE_VERSION=$1
+NEXT_SNAPSHOT_VERSION=$(echo $RELEASE_VERSION | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')-SNAPSHOT
 
-# Update version in pom.xml
-mvn versions:set -DnewVersion=$NEW_VERSION
+# Update version in pom.xml to release version
+mvn versions:set -DnewVersion=$RELEASE_VERSION
 mvn versions:commit
 
-# Update version in package.json
+# Update version in package.json to release version
 cd frontend
-npm version $NEW_VERSION --no-git-tag-version
+npm version $RELEASE_VERSION --no-git-tag-version
 cd ..
 
 # Update CHANGELOG.md
 DATE=$(date +%Y-%m-%d)
-sed -i "s/## \[Unreleased\]/## [Unreleased]\n\n## [$NEW_VERSION] - $DATE/" CHANGELOG.md
+sed -i "s/## \[Unreleased\]/## [Unreleased]\n\n## [$RELEASE_VERSION] - $DATE/" CHANGELOG.md
 
 # Update Dockerfile
-sed -i "s/org.opencontainers.image.version=\".*\"/org.opencontainers.image.version=\"$NEW_VERSION\"/" Dockerfile
+sed -i "s/org.opencontainers.image.version=\".*\"/org.opencontainers.image.version=\"$RELEASE_VERSION\"/" Dockerfile
 
-# Commit changes
+# Commit release changes
 git add pom.xml frontend/package.json CHANGELOG.md Dockerfile
-git commit -m "Release version $NEW_VERSION"
+git commit -m "Release version $RELEASE_VERSION"
 
 # Create a new tag
-git tag -a v$NEW_VERSION -m "Version $NEW_VERSION"
+git tag -a v$RELEASE_VERSION -m "Version $RELEASE_VERSION"
 
-# Push changes and tags
+# Push release changes and tags
 git push origin main
-git push origin v$NEW_VERSION
+git push origin v$RELEASE_VERSION
 
 # Build and push Docker image
-docker build -t mbarara-girls-ss:$NEW_VERSION .
-docker push mbarara-girls-ss:$NEW_VERSION
+docker build -t mbarara-girls-ss:$RELEASE_VERSION .
+docker push mbarara-girls-ss:$RELEASE_VERSION
 
-echo "Released version $NEW_VERSION"
+echo "Released version $RELEASE_VERSION"
+
+# Update to next snapshot version
+mvn versions:set -DnewVersion=$NEXT_SNAPSHOT_VERSION
+mvn versions:commit
+
+cd frontend
+npm version $NEXT_SNAPSHOT_VERSION --no-git-tag-version
+cd ..
+
+# Commit snapshot version update
+git add pom.xml frontend/package.json
+git commit -m "Prepare for next development iteration $NEXT_SNAPSHOT_VERSION"
+git push origin main
+
+echo "Updated to next snapshot version $NEXT_SNAPSHOT_VERSION"

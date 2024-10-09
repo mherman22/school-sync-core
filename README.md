@@ -56,8 +56,17 @@ To release a new version of the application:
    ```
 3. Run the release script with the new version number:
    ```
-   ./release.sh 1.0.1
+   ./release.sh 1.0.0
    ```
-   Replace `1.0.1` with the desired version number.
+   Replace `1.0.0` with the desired version number.
 
-The script will update version numbers, commit changes, create a git tag, push changes to the repository, and build and push a new Docker image.
+The script will:
+- Update version numbers to the release version
+- Update CHANGELOG.md
+- Commit changes and create a git tag
+- Push changes and tag to the repository
+- Build and push a new Docker image with the release version
+- Update version numbers to the next snapshot version (e.g., 1.0.1-SNAPSHOT)
+- Commit and push the snapshot version update
+
+This process ensures that after a release, the project is immediately prepared for the next development iteration.
