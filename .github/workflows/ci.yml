@@ -36,10 +36,12 @@ jobs:
       with:
         node-version: '14.x'
         
-    - name: Install dependencies
+    - name: Clean and reinstall dependencies
       run: |
         cd frontend
-        npm ci
+        rm -rf node_modules package-lock.json
+        npm cache clean --force
+        npm install
         
     - name: Build
       run: |
