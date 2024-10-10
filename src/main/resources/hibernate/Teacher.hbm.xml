@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.mgms.model">
+    <class name="Teacher" table="teachers">
+        <id name="id" type="long" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" type="string"/>
+        <property name="email" column="email" type="string"/>
+        <property name="subject" column="subject" type="string"/>
+    </class>
+</hibernate-mapping>

@@ -1,6 +1,6 @@
 package com.mgms.controller;
 
-import com.mgms.model.Timetable;
+import com.mgms.dto.TimetableDTO;
 import com.mgms.service.TimetableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,38 +12,39 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/timetables")
 public class TimetableController {
+
     @Autowired
     private TimetableService timetableService;
 
     @GetMapping
-    public List<Timetable> getAllTimetables() {
-        return timetableService.getAllTimetables();
+    public ResponseEntity<List<TimetableDTO>> getAllTimetables() {
+        return ResponseEntity.ok(timetableService.getAllTimetables());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Timetable> getTimetableById(@PathVariable Long id) {
-        Timetable timetable = timetableService.getTimetableById(id);
-        return timetable != null ? ResponseEntity.ok(timetable) : ResponseEntity.notFound().build();
+    public ResponseEntity<TimetableDTO> getTimetableById(@PathVariable Long id) {
+        TimetableDTO timetableDTO = timetableService.getTimetableById(id);
+        return timetableDTO != null ? ResponseEntity.ok(timetableDTO) : ResponseEntity.notFound().build();
     }
 
     @GetMapping("/class/{classId}")
-    public List<Timetable> getTimetablesByClass(@PathVariable Long classId) {
-        return timetableService.getTimetablesByClass(classId);
+    public ResponseEntity<List<TimetableDTO>> getTimetablesByClass(@PathVariable Long classId) {
+        return ResponseEntity.ok(timetableService.getTimetablesByClass(classId));
     }
 
     @GetMapping("/teacher/{teacherId}")
-    public List<Timetable> getTimetablesByTeacher(@PathVariable Long teacherId) {
-        return timetableService.getTimetablesByTeacher(teacherId);
+    public ResponseEntity<List<TimetableDTO>> getTimetablesByTeacher(@PathVariable Long teacherId) {
+        return ResponseEntity.ok(timetableService.getTimetablesByTeacher(teacherId));
     }
 
     @PostMapping
-    public Timetable createTimetable(@Valid @RequestBody Timetable timetable) {
-        return timetableService.createTimetable(timetable);
+    public ResponseEntity<TimetableDTO> createTimetable(@Valid @RequestBody TimetableDTO timetableDTO) {
+        return ResponseEntity.ok(timetableService.createTimetable(timetableDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Timetable> updateTimetable(@PathVariable Long id, @Valid @RequestBody Timetable timetableDetails) {
-        Timetable updatedTimetable = timetableService.updateTimetable(id, timetableDetails);
+    public ResponseEntity<TimetableDTO> updateTimetable(@PathVariable Long id, @Valid @RequestBody TimetableDTO timetableDTO) {
+        TimetableDTO updatedTimetable = timetableService.updateTimetable(id, timetableDTO);
         return updatedTimetable != null ? ResponseEntity.ok(updatedTimetable) : ResponseEntity.notFound().build();
     }
 

@@ -1,6 +1,6 @@
 package com.mgms.controller;
 
-import com.mgms.model.Class;
+import com.mgms.dto.ClassDTO;
 import com.mgms.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,28 +12,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/classes")
 public class ClassController {
+
     @Autowired
     private ClassService classService;
 
     @GetMapping
-    public List<Class> getAllClasses() {
-        return classService.getAllClasses();
+    public ResponseEntity<List<ClassDTO>> getAllClasses() {
+        return ResponseEntity.ok(classService.getAllClasses());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Class> getClassById(@PathVariable Long id) {
-        Class classObj = classService.getClassById(id);
-        return classObj != null ? ResponseEntity.ok(classObj) : ResponseEntity.notFound().build();
+    public ResponseEntity<ClassDTO> getClassById(@PathVariable Long id) {
+        ClassDTO classDTO = classService.getClassById(id);
+        return classDTO != null ? ResponseEntity.ok(classDTO) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public Class createClass(@Valid @RequestBody Class classObj) {
-        return classService.createClass(classObj);
+    public ResponseEntity<ClassDTO> createClass(@Valid @RequestBody ClassDTO classDTO) {
+        return ResponseEntity.ok(classService.createClass(classDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Class> updateClass(@PathVariable Long id, @Valid @RequestBody Class classDetails) {
-        Class updatedClass = classService.updateClass(id, classDetails);
+    public ResponseEntity<ClassDTO> updateClass(@PathVariable Long id, @Valid @RequestBody ClassDTO classDTO) {
+        ClassDTO updatedClass = classService.updateClass(id, classDTO);
         return updatedClass != null ? ResponseEntity.ok(updatedClass) : ResponseEntity.notFound().build();
     }
 
