@@ -4,7 +4,7 @@ This project contains both the backend (Java Spring) and frontend (Next.js) for 
 
 ## Running with Docker Compose
 
-To run the entire application (backend, frontend, and database) using Docker Compose:
+To run the entire application (backend, frontend, database, and Nginx) using Docker Compose:
 
 1. Make sure you have Docker and Docker Compose installed on your system.
 
@@ -20,8 +20,11 @@ To run the entire application (backend, frontend, and database) using Docker Com
    ```
 
 4. Access the application:
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8080
+   - Frontend and Backend API: http://localhost
+
+   The Nginx server acts as a reverse proxy, routing requests to either the frontend or backend service based on the URL path:
+   - Requests to `/api/*` are routed to the backend service
+   - All other requests are routed to the frontend service
 
 To stop the application, press Ctrl+C in the terminal where docker-compose is running, or run:
 
