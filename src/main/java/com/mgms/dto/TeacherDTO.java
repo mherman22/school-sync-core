@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-public class StudentDTO {
+public class TeacherDTO {
     private Long id;
 
     @NotBlank(message = "Name is required")
@@ -18,6 +18,6 @@ public class StudentDTO {
     @Email(message = "Email should be valid")
     private String email;
 
-    @NotBlank(message = "Class name is required")
-    private String className;
+    @NotBlank(message = "Subject is required")
+    private String subject;
 }

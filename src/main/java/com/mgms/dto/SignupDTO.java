@@ -8,16 +8,17 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-public class StudentDTO {
-    private Long id;
+public class SignupDTO {
+    @NotBlank(message = "Username is required")
+    private String username;
 
-    @NotBlank(message = "Name is required")
-    private String name;
+    @NotBlank(message = "Password is required")
+    private String password;
 
     @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid")
     private String email;
 
-    @NotBlank(message = "Class name is required")
-    private String className;
+    @NotBlank(message = "Role is required")
+    private String role;
 }

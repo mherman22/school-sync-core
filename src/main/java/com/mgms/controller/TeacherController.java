@@ -1,6 +1,6 @@
 package com.mgms.controller;
 
-import com.mgms.model.Teacher;
+import com.mgms.dto.TeacherDTO;
 import com.mgms.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,28 +12,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/teachers")
 public class TeacherController {
+
     @Autowired
     private TeacherService teacherService;
 
     @GetMapping
-    public List<Teacher> getAllTeachers() {
-        return teacherService.getAllTeachers();
+    public ResponseEntity<List<TeacherDTO>> getAllTeachers() {
+        return ResponseEntity.ok(teacherService.getAllTeachers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Teacher> getTeacherById(@PathVariable Long id) {
-        Teacher teacher = teacherService.getTeacherById(id);
-        return teacher != null ? ResponseEntity.ok(teacher) : ResponseEntity.notFound().build();
+    public ResponseEntity<TeacherDTO> getTeacherById(@PathVariable Long id) {
+        TeacherDTO teacherDTO = teacherService.getTeacherById(id);
+        return teacherDTO != null ? ResponseEntity.ok(teacherDTO) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public Teacher createTeacher(@Valid @RequestBody Teacher teacher) {
-        return teacherService.createTeacher(teacher);
+    public ResponseEntity<TeacherDTO> createTeacher(@Valid @RequestBody TeacherDTO teacherDTO) {
+        return ResponseEntity.ok(teacherService.createTeacher(teacherDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Teacher> updateTeacher(@PathVariable Long id, @Valid @RequestBody Teacher teacherDetails) {
-        Teacher updatedTeacher = teacherService.updateTeacher(id, teacherDetails);
+    public ResponseEntity<TeacherDTO> updateTeacher(@PathVariable Long id, @Valid @RequestBody TeacherDTO teacherDTO) {
+        TeacherDTO updatedTeacher = teacherService.updateTeacher(id, teacherDTO);
         return updatedTeacher != null ? ResponseEntity.ok(updatedTeacher) : ResponseEntity.notFound().build();
     }
 

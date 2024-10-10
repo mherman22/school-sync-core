@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.mgms.model">
+    <class name="Timetable" table="timetables">
+        <id name="id" type="long" column="id">
+            <generator class="native"/>
+        </id>
+        <many-to-one name="classObj" class="Class" column="class_id" not-null="true"/>
+        <many-to-one name="teacher" class="Teacher" column="teacher_id" not-null="true"/>
+        <property name="subject" column="subject" type="string"/>
+        <property name="dayOfWeek" column="day_of_week">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">java.time.DayOfWeek</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+        <property name="startTime" column="start_time" type="time"/>
+        <property name="endTime" column="end_time" type="time"/>
+    </class>
+</hibernate-mapping>
