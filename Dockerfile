@@ -1,27 +1,20 @@
-# Backend build stage
-FROM maven:3.8.4-openjdk-11 as backend-build
+# Build stage
+FROM maven:3.8.4-openjdk-11 as build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Frontend build stage
-FROM node:18 as frontend-build
-WORKDIR /app
-COPY frontend/package*.json ./
-RUN npm install
-COPY frontend .
-RUN npm run build
+# Tomcat stage
+FROM tomcat:9-jdk11-openjdk-slim
 
-# Final stage
-FROM openjdk:11-jre-slim
-WORKDIR /app
-COPY --from=backend-build /app/target/*.jar app.jar
-COPY --from=frontend-build /app/.next ./frontend/.next
-COPY --from=frontend-build /app/package*.json ./frontend/
+# Remove default Tomcat applications
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Install Node.js in the final image
-RUN apt-get update && apt-get install -y nodejs npm
+# Copy the built WAR file to Tomcat's webapps directory
+COPY --from=build /app/target/mbarara-girls-ss-core.war /usr/local/tomcat/webapps/mbarara-girls-ss-core.war
 
-EXPOSE 8080 3000
-CMD ["sh", "-c", "java -jar app.jar & cd frontend && npm start"]
+EXPOSE 8080
+
+# Start Tomcat
+CMD ["catalina.sh", "run"]
