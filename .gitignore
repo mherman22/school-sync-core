@@ -2,3 +2,4 @@
 school-sync-core.iml
 /target
 .vscode
+.DS_Store
