@@ -11,6 +11,7 @@ services:
       - frontend
 
   backend:
+    container_name: schoolsynccore-webapp
     build:
       context: .
       dockerfile: Dockerfile
@@ -23,9 +24,10 @@ services:
     depends_on:
       - db
     volumes:
-      - ./target/mbarara-girls-ss-core.war:/usr/local/tomcat/webapps/ROOT.war
+      - ./target/school-sync-core.war:/usr/local/tomcat/webapps/school-sync-core.war
 
   frontend:
+    container_name: schoolsynccore-frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile

@@ -12,7 +12,7 @@ FROM tomcat:9-jdk11-openjdk-slim
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy the built WAR file to Tomcat's webapps directory
-COPY --from=build /app/target/mbarara-girls-ss-core.war /usr/local/tomcat/webapps/mbarara-girls-ss-core.war
+COPY --from=build /app/target/school-sync-core.war /usr/local/tomcat/webapps/school-sync-core.war
 
 EXPOSE 8080
 

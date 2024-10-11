@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Mbarara Girls Management System",
-  description: "Dashboard for managing Mbarara Girls School",
+  title: "School Sync Management System",
+  description: "Dashboard for managing School Sync School",
 };
 
 export default function RootLayout({

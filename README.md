@@ -1,6 +1,6 @@
-# Mbarara Girls Secondary School Core System
+# school-sync-core System
 
-This project contains both the backend (Java Spring) and frontend (Next.js) for the Mbarara Girls Secondary School Management System.
+This project contains both the backend (Java Spring) and frontend (Next.js) for the school-sync-core system.
 
 ## Running with Docker Compose
 
@@ -10,8 +10,8 @@ To run the entire application (backend, frontend, database, and Nginx) using Doc
 
 2. Clone this repository:
    ```
-   git clone https://github.com/your-username/mbarara-girls-ss-core.git
-   cd mbarara-girls-ss-core
+   git clone https://github.com/mherman22/school-sync-core.git
+   cd school-sync-core
    ```
 
 3. Build and start the application:

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mgms</groupId>
-    <artifactId>mbarara-girls-ss-core</artifactId>
+    <artifactId>school-sync-core</artifactId>
     <version>1.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     
@@ -120,7 +120,7 @@
     </dependencies>
 
     <build>
-        <finalName>mbarara-girls-ss-core</finalName>
+        <finalName>school-sync-core</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -49,8 +49,8 @@ git push origin main
 git push origin v$RELEASE_VERSION
 
 # Build and push Docker image
-docker build -t mbarara-girls-ss:$RELEASE_VERSION .
-docker push mbarara-girls-ss:$RELEASE_VERSION
+docker build -t school-sync-core:$RELEASE_VERSION .
+docker push school-sync-core:$RELEASE_VERSION
 
 echo "Released version $RELEASE_VERSION"
 
