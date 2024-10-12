@@ -1,25 +1,26 @@
 # school-sync-core System
 
-This project contains both the backend (Java Spring) and frontend (Next.js) for the school-sync-core system.
+This project contains both the backend (Java Spring) and frontend (Next.js) for the school-sync-core system. The attempts to provide a school management system that is wholistic in nature.
 
 ## Running with Docker Compose
 
 To run the entire application (backend, frontend, database, and Nginx) using Docker Compose:
 
 1. Make sure you have Docker and Docker Compose installed on your system.
+2. Create a fork of the repository
 
-2. Clone this repository:
+3. Clone this repository:
    ```
-   git clone https://github.com/mherman22/school-sync-core.git
+   git clone https://github.com/your-github-username/school-sync-core.git
    cd school-sync-core
    ```
 
-3. Build and start the application:
+4. Build and start the application:
    ```
    docker-compose up --build
    ```
 
-4. Access the application:
+5. Access the application:
    - Frontend and Backend API: http://localhost
 
    The Nginx server acts as a reverse proxy, routing requests to either the frontend or backend service based on the URL path:
