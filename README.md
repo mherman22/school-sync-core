@@ -58,16 +58,16 @@ To release a new version of the application:
    ```
    chmod +x release.sh
    ```
-3. Run the release script with the new version number:
+3. Run the release script with the new version number and a commit message:
    ```
-   ./release.sh 1.0.0
+   ./release.sh 1.0.0 "Release version 1.0.0 with new feature X and bug fix Y"
    ```
-   Replace `1.0.0` with the desired version number.
+   Replace `1.0.0` with the desired version number and provide a descriptive commit message.
 
 The script will:
 - Update version numbers to the release version
 - Update CHANGELOG.md
-- Commit changes and create a git tag
+- Commit changes with the provided message and create a git tag
 - Push changes and tag to the repository
 - Build and push a new Docker image with the release version
 - Update version numbers to the next snapshot version (e.g., 1.0.1-SNAPSHOT)

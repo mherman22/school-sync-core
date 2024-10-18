@@ -9,37 +9,44 @@
 # Push the changes and tag to the repository
 # Build and push a new Docker image with the version tag
 
-# Check if a version number was provided
+# Check if version number is provided
 if [ -z "$1" ]; then
-    echo "Please provide a version number (e.g., 1.0.0)"
+    echo "Please provide a version number"
+    exit 1
+fi
+
+# Check if commit message is provided
+if [ -z "$2" ]; then
+    echo "Please provide a commit message"
     exit 1
 fi
 
 RELEASE_VERSION=$1
+COMMIT_MESSAGE=$2
 NEXT_SNAPSHOT_VERSION=$(echo $RELEASE_VERSION | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')-SNAPSHOT
 
-# Update version in pom.xml to release version
+# Update version in pom.xml
 mvn versions:set -DnewVersion=$RELEASE_VERSION
 mvn versions:commit
 
-# Update version in package.json to release version
+# Update version in package.json
 cd frontend
 npm version $RELEASE_VERSION --no-git-tag-version
 cd ..
 
 # Update CHANGELOG.md
-DATE=$(date +%Y-%m-%d)
-sed -i "s/## \[Unreleased\]/## [Unreleased]\n\n## [$RELEASE_VERSION] - $DATE/" CHANGELOG.md
-
-# Update the date for any existing version entries that still have YYYY-MM-DD
-sed -i "s/\[[0-9]\+\.[0-9]\+\.[0-9]\+\] - YYYY-MM-DD/[$RELEASE_VERSION] - $DATE/" CHANGELOG.md
+echo "## [$RELEASE_VERSION] - $(date +%Y-%m-%d)" >> CHANGELOG.md
+echo "" >> CHANGELOG.md
+echo "<!-- Add release notes here -->" >> CHANGELOG.md
+echo "" >> CHANGELOG.md
+cat CHANGELOG.md >> CHANGELOG.tmp && mv CHANGELOG.tmp CHANGELOG.md
 
 # Update Dockerfile
 sed -i "s/org.opencontainers.image.version=\".*\"/org.opencontainers.image.version=\"$RELEASE_VERSION\"/" Dockerfile
 
 # Commit release changes
 git add pom.xml frontend/package.json CHANGELOG.md Dockerfile
-git commit -m "Release version $RELEASE_VERSION"
+git commit -m "$COMMIT_MESSAGE"
 
 # Create a new tag
 git tag -a v$RELEASE_VERSION -m "Version $RELEASE_VERSION"
