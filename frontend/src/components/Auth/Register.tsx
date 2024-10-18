@@ -1,12 +1,30 @@
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
-type UserRole = 'student' | 'teacher' | 'admin' | 'finance' | 'health' | 'dormitory';
+type UserRole =
+  | 'student'
+  | 'teacher'
+  | 'admin'
+  | 'finance'
+  | 'health'
+  | 'dormitory';
 
 type RegisterProps = {
-  onRegister: (name: string, email: string, password: string, role: UserRole) => void;
+  onRegister: (
+    name: string,
+    email: string,
+    password: string,
+    role: UserRole
+  ) => void;
 };
 
 export function Register({ onRegister }: RegisterProps) {
@@ -24,7 +42,9 @@ export function Register({ onRegister }: RegisterProps) {
     <Card className="w-[350px] bg-white">
       <CardHeader>
         <CardTitle className="text-black">Register</CardTitle>
-        <CardDescription className="text-gray-600">Create a new account to access the system.</CardDescription>
+        <CardDescription className="text-gray-600">
+          Create a new account to access the system.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit}>
@@ -79,8 +99,16 @@ export function Register({ onRegister }: RegisterProps) {
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline" className="text-black border-gray-300">Cancel</Button>
-        <Button type="submit" onClick={handleSubmit} className="bg-blue-600 text-white hover:bg-blue-700">Register</Button>
+        <Button variant="outline" className="text-black border-gray-300">
+          Cancel
+        </Button>
+        <Button
+          type="submit"
+          onClick={handleSubmit}
+          className="bg-blue-600 text-white hover:bg-blue-700"
+        >
+          Register
+        </Button>
       </CardFooter>
     </Card>
   );
