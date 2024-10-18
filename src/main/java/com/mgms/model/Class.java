@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Class {
-    private Long id;
-    private String name;
-    private Integer capacity;
+  private Long id;
+  private String name;
+  private Integer capacity;
 }

@@ -19,6 +19,9 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         
+    - name: Check code formatting
+      run: mvn spotless:check
+        
     - name: Build with Maven
       run: mvn clean install -DskipTests
       
@@ -42,6 +45,11 @@ jobs:
         rm -rf node_modules package-lock.json
         npm cache clean --force
         npm install
+        
+    - name: Check code formatting
+      run: |
+        cd frontend
+        npm run lint
         
     - name: Build
       run: |
