@@ -1,12 +1,21 @@
 'use client';
 
-import { useRouter, usePathname } from 'next/navigation'
-import { Button } from "@/components/ui/button"
-import { BookOpen, Calendar, FileText, Users, Printer, DollarSign, Activity, Home } from "lucide-react"
+import { useRouter, usePathname } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import {
+  BookOpen,
+  Calendar,
+  FileText,
+  Users,
+  Printer,
+  DollarSign,
+  Activity,
+  Home,
+} from 'lucide-react';
 
 export function Sidebar() {
-  const router = useRouter()
-  const pathname = usePathname()
+  const router = useRouter();
+  const pathname = usePathname();
 
   const navItems = [
     { href: '/dashboard', icon: BookOpen, label: 'Overview' },
@@ -17,7 +26,7 @@ export function Sidebar() {
     { href: '/dashboard/finance', icon: DollarSign, label: 'Finance' },
     { href: '/dashboard/dispensary', icon: Activity, label: 'Dispensary' },
     { href: '/dashboard/dormitory', icon: Home, label: 'Dormitory' },
-  ]
+  ];
 
   return (
     <div className="w-64 bg-white p-6 shadow-md">
@@ -28,7 +37,9 @@ export function Sidebar() {
             key={item.href}
             variant="ghost"
             className={`w-full justify-start mb-2 ${
-              pathname === item.href ? 'bg-gray-200 text-black' : 'text-gray-700 hover:text-black'
+              pathname === item.href
+                ? 'bg-gray-200 text-black'
+                : 'text-gray-700 hover:text-black'
             }`}
             onClick={() => router.push(item.href)}
           >
@@ -38,5 +49,5 @@ export function Sidebar() {
         ))}
       </nav>
     </div>
-  )
+  );
 }

@@ -6,7 +6,12 @@ import { Register } from '@/components/Auth/Register';
 export default function RegisterPage() {
   const router = useRouter();
 
-  const handleRegister = (name: string, email: string, password: string, role: string) => {
+  const handleRegister = (
+    name: string,
+    email: string,
+    password: string,
+    role: string
+  ) => {
     // Implement registration logic here
     console.log('Registration attempt:', name, email, password, role);
     // After successful registration, redirect to login page
