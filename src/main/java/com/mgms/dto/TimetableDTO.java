@@ -1,11 +1,20 @@
+/*
+ * Copyright (c) 2024 School Sync
+ *
+ * This file is part of School Sync Core, licensed under the MIT License.
+ * For full license text, see the LICENSE file in the project root.
+ */
 package com.mgms.dto;
+
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.mgms.model.Class;
 import com.mgms.model.Teacher;
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 

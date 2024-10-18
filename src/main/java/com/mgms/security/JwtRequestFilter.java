@@ -1,10 +1,18 @@
+/*
+ * Copyright (c) 2024 School Sync
+ *
+ * This file is part of School Sync Core, licensed under the MIT License.
+ * For full license text, see the LICENSE file in the project root.
+ */
 package com.mgms.security;
 
 import java.io.IOException;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

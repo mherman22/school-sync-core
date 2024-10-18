@@ -1,14 +1,22 @@
+/*
+ * Copyright (c) 2024 School Sync
+ *
+ * This file is part of School Sync Core, licensed under the MIT License.
+ * For full license text, see the LICENSE file in the project root.
+ */
 package com.mgms.service.impl;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mgms.dao.TeacherDao;
 import com.mgms.dto.TeacherDTO;
 import com.mgms.model.Teacher;
 import com.mgms.service.TeacherService;
-import java.util.List;
-import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional

@@ -1,7 +1,15 @@
+/*
+ * Copyright (c) 2024 School Sync
+ *
+ * This file is part of School Sync Core, licensed under the MIT License.
+ * For full license text, see the LICENSE file in the project root.
+ */
 package com.mgms.config;
 
 import java.util.Properties;
+
 import javax.sql.DataSource;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

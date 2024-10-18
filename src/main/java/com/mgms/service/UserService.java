@@ -1,9 +1,16 @@
+/*
+ * Copyright (c) 2024 School Sync
+ *
+ * This file is part of School Sync Core, licensed under the MIT License.
+ * For full license text, see the LICENSE file in the project root.
+ */
 package com.mgms.service;
+
+import java.util.List;
 
 import com.mgms.dto.LoginDTO;
 import com.mgms.dto.SignupDTO;
 import com.mgms.dto.UserDTO;
-import java.util.List;
 
 public interface UserService {
   List<UserDTO> getAllUsers();

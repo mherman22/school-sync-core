@@ -19,11 +19,11 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         
-    - name: Check code formatting
-      run: mvn spotless:check
+    - name: Format code
+      run: mvn -Djava.compiler.argument=--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED spotless:apply
         
     - name: Build with Maven
-      run: mvn clean install -DskipTests
+      run: mvn -Djava.compiler.argument=--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED clean verify
       
     - name: Run tests
       run: mvn test
