@@ -8,20 +8,16 @@ package com.mgms.service;
 
 import java.util.List;
 
-import com.mgms.dto.TimetableDTO;
+import com.mgms.model.Timetable;
 
 public interface TimetableService {
-  List<TimetableDTO> getAllTimetables();
+  List<Timetable> getAllTimetables();
 
-  TimetableDTO getTimetableById(Long id);
+  Timetable getTimetableById(Long id);
 
-  List<TimetableDTO> getTimetablesByClass(Long classId);
+  Timetable createTimetable(Timetable timetable);
 
-  List<TimetableDTO> getTimetablesByTeacher(Long teacherId);
-
-  TimetableDTO createTimetable(TimetableDTO timetableDTO);
-
-  TimetableDTO updateTimetable(Long id, TimetableDTO timetableDTO);
+  Timetable updateTimetable(Long id, Timetable timetable);
 
   void deleteTimetable(Long id);
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.mgms.dto.LoginDTO;
 import com.mgms.dto.SignupDTO;
-import com.mgms.dto.UserDTO;
+import com.mgms.model.User;
 import com.mgms.service.UserService;
 
 @RestController
@@ -26,31 +26,30 @@ public class UserController {
   @Autowired private UserService userService;
 
   @GetMapping
-  public ResponseEntity<List<UserDTO>> getAllUsers() {
+  public ResponseEntity<List<User>> getAllUsers() {
     return ResponseEntity.ok(userService.getAllUsers());
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
-    UserDTO userDTO = userService.getUserById(id);
-    return userDTO != null ? ResponseEntity.ok(userDTO) : ResponseEntity.notFound().build();
+  public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    User user = userService.getUserById(id);
+    return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
   }
 
   @GetMapping("/username/{username}")
-  public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
-    UserDTO userDTO = userService.getUserByUsername(username);
-    return userDTO != null ? ResponseEntity.ok(userDTO) : ResponseEntity.notFound().build();
+  public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+    User user = userService.getUserByUsername(username);
+    return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
   }
 
   @PostMapping
-  public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) {
-    return ResponseEntity.ok(userService.createUser(userDTO));
+  public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+    return ResponseEntity.ok(userService.createUser(user));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<UserDTO> updateUser(
-      @PathVariable Long id, @Valid @RequestBody UserDTO userDTO) {
-    UserDTO updatedUser = userService.updateUser(id, userDTO);
+  public ResponseEntity<User> updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
+    User updatedUser = userService.updateUser(id, user);
     return updatedUser != null ? ResponseEntity.ok(updatedUser) : ResponseEntity.notFound().build();
   }
 
@@ -61,7 +60,7 @@ public class UserController {
   }
 
   @PostMapping("/signup")
-  public ResponseEntity<UserDTO> signup(@Valid @RequestBody SignupDTO signupDTO) {
+  public ResponseEntity<User> signup(@Valid @RequestBody SignupDTO signupDTO) {
     return ResponseEntity.ok(userService.signup(signupDTO));
   }
 

@@ -8,16 +8,16 @@ package com.mgms.service;
 
 import java.util.List;
 
-import com.mgms.dto.TeacherDTO;
+import com.mgms.model.Teacher;
 
 public interface TeacherService {
-  List<TeacherDTO> getAllTeachers();
+  List<Teacher> getAllTeachers();
 
-  TeacherDTO getTeacherById(Long id);
+  Teacher getTeacherById(Long id);
 
-  TeacherDTO createTeacher(TeacherDTO teacherDTO);
+  Teacher createTeacher(Teacher teacher);
 
-  TeacherDTO updateTeacher(Long id, TeacherDTO teacherDTO);
+  Teacher updateTeacher(Long id, Teacher teacher);
 
   void deleteTeacher(Long id);
 }

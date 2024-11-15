@@ -8,13 +8,11 @@ package com.mgms.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.mgms.dto.TeacherDTO;
+import com.mgms.model.Teacher;
 import com.mgms.service.TeacherService;
 
 @RestController
@@ -24,25 +22,25 @@ public class TeacherController {
   @Autowired private TeacherService teacherService;
 
   @GetMapping
-  public ResponseEntity<List<TeacherDTO>> getAllTeachers() {
+  public ResponseEntity<List<Teacher>> getAllTeachers() {
     return ResponseEntity.ok(teacherService.getAllTeachers());
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<TeacherDTO> getTeacherById(@PathVariable Long id) {
-    TeacherDTO teacherDTO = teacherService.getTeacherById(id);
-    return teacherDTO != null ? ResponseEntity.ok(teacherDTO) : ResponseEntity.notFound().build();
+  public ResponseEntity<Teacher> getTeacherById(@PathVariable Long id) {
+    Teacher teacher = teacherService.getTeacherById(id);
+    return teacher != null ? ResponseEntity.ok(teacher) : ResponseEntity.notFound().build();
   }
 
   @PostMapping
-  public ResponseEntity<TeacherDTO> createTeacher(@Valid @RequestBody TeacherDTO teacherDTO) {
-    return ResponseEntity.ok(teacherService.createTeacher(teacherDTO));
+  public ResponseEntity<Teacher> createTeacher(@RequestBody Teacher teacher) {
+    return ResponseEntity.ok(teacherService.createTeacher(teacher));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<TeacherDTO> updateTeacher(
-      @PathVariable Long id, @Valid @RequestBody TeacherDTO teacherDTO) {
-    TeacherDTO updatedTeacher = teacherService.updateTeacher(id, teacherDTO);
+  public ResponseEntity<Teacher> updateTeacher(
+      @PathVariable Long id, @RequestBody Teacher teacher) {
+    Teacher updatedTeacher = teacherService.updateTeacher(id, teacher);
     return updatedTeacher != null
         ? ResponseEntity.ok(updatedTeacher)
         : ResponseEntity.notFound().build();

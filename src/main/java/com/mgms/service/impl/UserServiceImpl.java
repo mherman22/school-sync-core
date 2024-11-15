@@ -7,7 +7,6 @@
 package com.mgms.service.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mgms.dao.UserDao;
 import com.mgms.dto.LoginDTO;
 import com.mgms.dto.SignupDTO;
-import com.mgms.dto.UserDTO;
 import com.mgms.model.User;
 import com.mgms.security.JwtUtil;
 import com.mgms.service.UserService;
@@ -31,37 +29,35 @@ public class UserServiceImpl implements UserService {
   @Autowired private JwtUtil jwtUtil;
 
   @Override
-  public List<UserDTO> getAllUsers() {
-    return userDao.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
+  public List<User> getAllUsers() {
+    return userDao.findAll();
   }
 
   @Override
-  public UserDTO getUserById(Long id) {
-    User user = userDao.findById(id);
-    return user != null ? convertToDTO(user) : null;
+  public User getUserById(Long id) {
+    return userDao.findById(id);
   }
 
   @Override
-  public UserDTO getUserByUsername(String username) {
+  public User getUserByUsername(String username) {
     User user = userDao.findByUsername(username);
-    return user != null ? convertToDTO(user) : null;
+    return user != null ? user : null;
   }
 
   @Override
-  public UserDTO createUser(UserDTO userDTO) {
-    User user = convertToEntity(userDTO);
-    return convertToDTO(userDao.save(user));
+  public User createUser(User user) {
+    return userDao.save(user);
   }
 
   @Override
-  public UserDTO updateUser(Long id, UserDTO userDTO) {
-    User user = userDao.findById(id);
-    if (user != null) {
-      user.setUsername(userDTO.getUsername());
-      user.setEmail(userDTO.getEmail());
-      user.setRole(userDTO.getRole());
-      // Don't update password here, create a separate method for password change
-      return convertToDTO(userDao.save(user));
+  public User updateUser(Long id, User user) {
+    User existingUser = userDao.findById(id);
+    if (existingUser != null) {
+      existingUser.setUsername(user.getUsername());
+      existingUser.setEmail(user.getEmail());
+      existingUser.setPassword(user.getPassword());
+      existingUser.setRole(user.getRole());
+      return userDao.save(existingUser);
     }
     return null;
   }
@@ -72,7 +68,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public UserDTO signup(SignupDTO signupDTO) {
+  public User signup(SignupDTO signupDTO) {
     User existingUser = userDao.findByUsername(signupDTO.getUsername());
     if (existingUser != null) {
       throw new RuntimeException("Username already exists");
@@ -85,7 +81,7 @@ public class UserServiceImpl implements UserService {
     user.setRole(signupDTO.getRole());
 
     User savedUser = userDao.save(user);
-    return convertToDTO(savedUser);
+    return savedUser;
   }
 
   @Override
@@ -96,23 +92,5 @@ public class UserServiceImpl implements UserService {
     }
 
     return jwtUtil.generateToken(user.getUsername(), user.getRole());
-  }
-
-  private UserDTO convertToDTO(User user) {
-    UserDTO dto = new UserDTO();
-    dto.setId(user.getId());
-    dto.setUsername(user.getUsername());
-    dto.setEmail(user.getEmail());
-    dto.setRole(user.getRole());
-    return dto;
-  }
-
-  private User convertToEntity(UserDTO dto) {
-    User user = new User();
-    user.setId(dto.getId());
-    user.setUsername(dto.getUsername());
-    user.setEmail(dto.getEmail());
-    user.setRole(dto.getRole());
-    return user;
   }
 }

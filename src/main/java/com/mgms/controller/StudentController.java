@@ -8,13 +8,11 @@ package com.mgms.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.mgms.dto.StudentDTO;
+import com.mgms.model.Student;
 import com.mgms.service.StudentService;
 
 @RestController
@@ -23,25 +21,25 @@ public class StudentController {
   @Autowired private StudentService studentService;
 
   @GetMapping
-  public ResponseEntity<List<StudentDTO>> getAllStudents() {
+  public ResponseEntity<List<Student>> getAllStudents() {
     return ResponseEntity.ok(studentService.getAllStudents());
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<StudentDTO> getStudentById(@PathVariable Long id) {
-    StudentDTO student = studentService.getStudentById(id);
+  public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
+    Student student = studentService.getStudentById(id);
     return student != null ? ResponseEntity.ok(student) : ResponseEntity.notFound().build();
   }
 
   @PostMapping
-  public ResponseEntity<StudentDTO> createStudent(@Valid @RequestBody StudentDTO studentDTO) {
-    return ResponseEntity.ok(studentService.createStudent(studentDTO));
+  public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+    return ResponseEntity.ok(studentService.createStudent(student));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<StudentDTO> updateStudent(
-      @PathVariable Long id, @Valid @RequestBody StudentDTO studentDTO) {
-    StudentDTO updatedStudent = studentService.updateStudent(id, studentDTO);
+  public ResponseEntity<Student> updateStudent(
+      @PathVariable Long id, @RequestBody Student student) {
+    Student updatedStudent = studentService.updateStudent(id, student);
     return updatedStudent != null
         ? ResponseEntity.ok(updatedStudent)
         : ResponseEntity.notFound().build();

@@ -10,22 +10,22 @@ import java.util.List;
 
 import com.mgms.dto.LoginDTO;
 import com.mgms.dto.SignupDTO;
-import com.mgms.dto.UserDTO;
+import com.mgms.model.User;
 
 public interface UserService {
-  List<UserDTO> getAllUsers();
+  List<User> getAllUsers();
 
-  UserDTO getUserById(Long id);
+  User getUserById(Long id);
 
-  UserDTO getUserByUsername(String username);
+  User getUserByUsername(String username);
 
-  UserDTO createUser(UserDTO userDTO);
+  User createUser(User user);
 
-  UserDTO updateUser(Long id, UserDTO userDTO);
+  User updateUser(Long id, User user);
 
   void deleteUser(Long id);
 
-  UserDTO signup(SignupDTO signupDTO);
+  User signup(SignupDTO signupDTO);
 
   String login(LoginDTO loginDTO);
 }
